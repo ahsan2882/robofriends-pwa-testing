@@ -1,14 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import "tachyons";
+import App from "./containers/App";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { searchRobotReducer, requestRobotsReducer } from "./store/reducers";
+import thunk from "redux-thunk";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootReducer = combineReducers({
+  searchRobotReducer,
+  requestRobotsReducer,
+});
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [thunk, logger],
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
