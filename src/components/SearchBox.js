@@ -7,6 +7,7 @@ function SearchBox({ onFieldValueChange }) {
         className="pa-3 ba b--green bg-lightest-blue"
         onChange={onFieldValueChange}
         type="search"
+        aria-label="Search robots"
         placeholder="search robot friends"
       />
     </div>
